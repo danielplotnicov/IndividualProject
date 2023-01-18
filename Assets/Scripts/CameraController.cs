@@ -1,21 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Player1Movement player;
-    [SerializeField] private int Plater_Camera_Distance = 2;
+    [SerializeField] private Player1Movement player1;
+    [SerializeField] private Player2Movement player2;
+
+
     void Update()
     {
-        if (player.sprite.flipX)
-        {
-            
-            transform.position = new Vector3(player.transform.position.x-Plater_Camera_Distance, player.transform.position.y, transform.position.z);
-        }
-        else
-        {
-            transform.position = new Vector3(player.transform.position.x+Plater_Camera_Distance, player.transform.position.y, transform.position.z);
-        }
+        transform.position = new Vector3((player1.transform.position.x + player2.transform.position.x) / 2,
+            (player1.transform.position.y + player2.transform.position.y) / 2, transform.position.z);
     }
 }

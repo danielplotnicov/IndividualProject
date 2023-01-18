@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,16 +32,34 @@ public class Player1Movement : MonoBehaviour
     }
     void Update()
     {
-        dirX = Input.GetAxisRaw("Horizontal");
+        if (Input.GetKey(KeyCode.A))
+        {
+            dirX = -1.0f;
+        } else if (Input.GetKey(KeyCode.D))
+        {
+            dirX = 1.0f;
+        }
+        else
+        {
+            dirX = .0f;
+        }
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
         
-        if (Input.GetButtonDown("Jump") && isGrounded())
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
+        if (Input.GetKey(KeyCode.S))
+        {
+            rb.gravityScale = 7;
+        }
+        else
+        {
+            rb.gravityScale = 1.5f;
+        }
+
         AnimationUpdate();
-        
     }
 
     private void AnimationUpdate()
